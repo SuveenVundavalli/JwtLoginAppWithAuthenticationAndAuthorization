@@ -40,6 +40,17 @@ services:
     environment:
       # Adding docker specific config via profile
       - "SPRING_PROFILES_INCLUDE=docker"
+  frontend:
+    build:
+      context: ./frontend/
+    command: yarn start
+    volumes:
+      - ./frontend/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
 
 # Names our volume
 volumes:
